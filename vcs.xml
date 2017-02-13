@@ -10,6 +10,10 @@
           <option name="url" value="https://github.com/jbcrick/Project-1" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.ncsu.edu/pdscott2/bank-app.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="C:\Users\John B. Crick III\RubymineProjects" />
