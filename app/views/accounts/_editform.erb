@@ -1,0 +1,41 @@
+<%= form_for(account) do |f| %>
+    <% if account.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(account.errors.count, 'error') %> prohibited this account from being saved:</h2>
+
+          <ul>
+            <% account.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <p>
+      <strong>User:</strong>
+      <%= @account.user.name %>
+    </p>
+
+    <p>
+      <strong>Account Number</strong>
+      <%= sprintf("%09d",@account.id) %>
+    </p>
+
+    <p>
+      <%= f.label :status %>
+      <%= select('account', 'status', Account.all_statuses.collect{ |c| c }) %>
+    </p>
+
+    <p>
+      <strong>Current Balance:</strong>
+      <%= @account.balance %>
+    </p>
+
+    <p>
+      <%= f.label "New Balance" %>
+      <%= f.text_field :balance %>
+    </p>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
