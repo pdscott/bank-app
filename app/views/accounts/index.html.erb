@@ -19,7 +19,9 @@
         <td><%= account.status %></td>
         <td><%= account.balance %></td>
         <td><%= link_to 'Show', account %></td>
-        <td><%= link_to 'Edit', edit_account_path(account) %></td>
+        <% if current_user.try(:admin?) %>
+            <td><%= link_to 'Edit', edit_account_path(account) %></td>
+        <% end %>
         <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

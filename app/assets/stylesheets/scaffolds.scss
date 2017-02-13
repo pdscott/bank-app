@@ -33,6 +33,11 @@ a {
   }
 }
 
+table {
+  border-collapse: separate;
+  border-spacing: 50px 0;
+}
+
 th {
   padding-bottom: 5px;
 }

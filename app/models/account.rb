@@ -4,7 +4,7 @@ class Account < ApplicationRecord
 
   after_initialize :default_values
 
-  def self.all_statuses ; %w[active closed] ; end
+  def self.all_statuses ; %w[active closed N/A] ; end
 
   def default_values
     self.status ||= "active"

@@ -5,7 +5,14 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
+    @accounts = Array.new
+    @accounts.insert(Account.new)
+    @sql = "select * from accounts where accounts.user_id = " + params[:user_id]
+    begin
+      @accounts = Account.find_by_sql(@sql)
+    rescue ActiveRecord::RecordNotFound
+      @accounts = Account.new
+    end
   end
 
   # GET /accounts/1
@@ -55,7 +62,7 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
-    @account.destroy
+    @account.destroy(account_params)
     respond_to do |format|
       format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
       format.json { head :no_content }
