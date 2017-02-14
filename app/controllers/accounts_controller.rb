@@ -1,11 +1,20 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  after_action :verify_authorized
 
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
+    if params[:user_id]
+      @accounts = Account.where("user_id = ?", params[:user_id])
+      user = User.find(params[:user_id])
+      authorize user
+    else
+      @accounts = Account.all
+      user = User.find(1)
+      authorize user
+    end
   end
 
   # GET /accounts/1
@@ -13,16 +22,21 @@ class AccountsController < ApplicationController
   def show
     @account = Account.find(params[:id])
     @transactions = Transaction.all
+    user = User.find(@account.user_id)
+    authorize user
   end
 
   # GET /accounts/new
   def new
     @account = Account.new
-    @account.user = current_user
+    @account.user = User.find(params[:user_id])
+    user = User.find(@account.user.id)
+    authorize user
   end
 
   # GET /accounts/1/edit
   def edit
+    authorize User
   end
 
   # POST /accounts
@@ -39,6 +53,9 @@ class AccountsController < ApplicationController
         format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
+
+    user = User.find(@account.user_id)
+    authorize user
   end
 
   # PATCH/PUT /accounts/1
@@ -53,12 +70,15 @@ class AccountsController < ApplicationController
         format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
+    authorize User
   end
 
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
-    @account.destroy(account_params)
+    account = Account.find(params[:id])
+    authorize User
+    account.destroy
     respond_to do |format|
       format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
       format.json { head :no_content }

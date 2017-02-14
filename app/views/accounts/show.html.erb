@@ -63,9 +63,19 @@
 <br>
 
 <% if @account.status != "pending"%>
-  <%= link_to 'Request New Transaction', new_transaction_path(account_id: @account.id) %> |
+  <%= link_to 'Request New Transaction', new_transaction_path(account_id: @account.id) %>
+<% else %>
+  <p> Account Awaiting Approval </p>
 <% end %>
 <% if current_user.role == "admin" %>
   <%= link_to 'Edit Account', edit_account_path(@account) %> |
 <% end %>
-<%= link_to 'Back', accounts_path %>
+
+
+
+
+<% if current_user.role == "user" %>
+    <%= link_to 'Back', user_accounts_path(current_user) %>
+<% elsif current_user.role == "admin" %>
+    <%= link_to 'Back', accounts_path %>
+<% end %>

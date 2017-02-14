@@ -16,7 +16,7 @@ img {
 // create your own classes
 // to make views framework-neutral
 .column {
-  @extend .col-md-9;
+  @extend .col-md-10;
   @extend .text-center;
   }
 .form {
