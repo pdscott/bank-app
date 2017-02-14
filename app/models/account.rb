@@ -4,10 +4,10 @@ class Account < ApplicationRecord
 
   after_initialize :default_values
 
-  def self.all_statuses ; %w[active closed N/A] ; end
+  def self.all_statuses ; %w[active closed pending N/A] ; end
 
   def default_values
-    self.status ||= "active"
+    self.status ||= "pending"
     self.balance = 0.0
   end
 

@@ -11,11 +11,14 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
+    @account = Account.find(params[:id])
+    @transactions = Transaction.all
   end
 
   # GET /accounts/new
   def new
     @account = Account.new
+    @account.user = current_user
   end
 
   # GET /accounts/1/edit

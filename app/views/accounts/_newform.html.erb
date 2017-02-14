@@ -11,10 +11,13 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :user %><br />
-      <%= select('account', 'user_id', User.all.collect{ |c| [ c.name, c.id] }) %>
-    </div>
+    <% if @account.user != nil %>
+      <div class="field">
+        <%= f.label :user %><br />
+        <%= f.label @account.user.name %><br />
+        <%= f.hidden_field :user_id, value: @account.user.id %>
+      </div>
+    <% end %>
 
 
     <div class="actions">

@@ -1,13 +1,11 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  after_action :verify_authorized
 
   # GET /transactions
   # GET /transactions.json
   def index
     @transactions = Transaction.all
-    authorize User
   end
 
   # GET /transactions/1
@@ -18,6 +16,7 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new
+    @account = Account.find(params[:account_id])
   end
 
   # GET /transactions/1/edit

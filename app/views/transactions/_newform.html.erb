@@ -11,30 +11,33 @@
         </div>
     <% end %>
 
-    <p>
-      <%= f.label :account %>
-      <%= select('transaction', 'account_id', Account.all.collect{ |c| c.id }) %>
-    </p>
+    <% if @account != nil %>
+      <div class="field">
+        <%= f.label :account %>
+        <%= f.label @account.id %><br />
+        <%= f.hidden_field :account_id, value: @account.id %>
+      </div>
 
-    <p>
-      <%= f.label :kind %>
-      <%= select('transaction', 'kind', Transaction.all_kinds.collect{ |c| c }) %>
-    </p>
+      <div class="field">
+        <%= f.label :kind %>
+        <%= select('transaction', 'kind', Transaction.all_kinds.collect{ |c| c }) %>
+      </div>
 
-    <div class="field">
-      <%= f.label :amount %>
-      <%= f.text_field :amount %>
-    </div>
+      <div class="field">
+        <%= f.label :amount %>
+        <%= f.text_field :amount %>
+      </div>
 
-    <div class="field">
-      <%= f.label :from %>
-      <%= f.number_field :from %>
-    </div>
+      <div class="field">
+        <%= f.label :from %>
+        <%= select('transaction', 'from', User.all.collect{ |c| [ c.name, c.id] }) %>
+      </div>
 
-    <div class="field">
-      <%= f.label :to %>
-      <%= f.number_field :to %>
-    </div>
+      <div class="field">
+        <%= f.label :to %>
+        <%= select('transaction', 'to', User.all.collect{ |c| [ c.name, c.id] }) %>
+      </div>
+    <% end %>
 
     <div class="actions">
       <%= f.submit %>
