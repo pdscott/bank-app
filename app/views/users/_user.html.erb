@@ -2,15 +2,19 @@
 <td>
   <%= link_to user.name, user %>
 </td>
+
 <td>
   <%= link_to user.email, user %>
 </td>
+
 <td>
   <%= link_to 'accounts', accounts_path %>
 </td>
+
 <td>
   Active
 </td>
+
 <td>
   <%= form_for(user) do |f| %>
     <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>

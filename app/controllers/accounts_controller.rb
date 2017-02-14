@@ -5,14 +5,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Array.new
-    @accounts.insert(Account.new)
-    @sql = "select * from accounts where accounts.user_id = " + params[:user_id]
-    begin
-      @accounts = Account.find_by_sql(@sql)
-    rescue ActiveRecord::RecordNotFound
-      @accounts = Account.new
-    end
+    @accounts = Account.all
   end
 
   # GET /accounts/1
