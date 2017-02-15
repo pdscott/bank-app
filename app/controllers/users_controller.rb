@@ -27,6 +27,9 @@ class UsersController < ApplicationController
     authorize user
     user.destroy
     redirect_to users_path, :notice => "User deleted."
+
+    #TODO
+    #when a user is destroyed, all his accounts and transactions need to go too
   end
 
   private
