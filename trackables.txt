@@ -7,27 +7,27 @@ C-A user can have multiple accounts to manage money.
 C-User needs an admin’s authorization to deposit money.
 -User needs an admin’s authorization to withdraw money if  the transaction amount is greater than $1000 from his/her account.
 -User should be able to search through the list of users ( by name or email address) and add them as friends.
--User can transfer money between his/her accounts and to a friend’s account without permission from an admin.
+-User can transfer money between his/her accounts and to a friend ’s account without permission from an admin.
 C-An admin has the authorization to approve or decline any pending transactions.
 
 
 Admins:
 -------------
--Log in with an email and password
--Edit her/his profile details
--Create new admins
+C-Log in with an email and password
+C-Edit her/his profile details
+C-Create new admins
 -View the list of all the admins and their profile details (except password)
--Delete admins (except herself/himself and the preconfigured Admin)
--Create an account for a user. An account will have the following attributes: Account Number (unique for each account, 9-digit number), status, balance
--View the list of all the accounts. View the balance for the accounts
--View the details of an account. Also, show the user who own the account.
--Edit the details of an account
--Approve or decline a transaction request
--View the transaction history of an account
+C-Delete admins (except herself/himself and the preconfigured Admin)
+C-Create an account for a user. An account will have the following attributes: Account Number (unique for each account, 9-digit number), status, balance
+C-View the list of all the accounts. View the balance for the accounts
+C-View the details of an account. Also, show the user who own the account.
+C-Edit the details of an account
+C-Approve or decline a transaction request
+C-View the transaction history of an account
 -Delete an account from the system
--View the list of all the users and their profile details (except password)
--View the transaction history of a user 
--Delete a user
+C-View the list of all the users and their profile details (except password)
+C-View the transaction history of a user 
+-Delete a user (need to delete accounts and transactions, too)
 
 
 Users:
