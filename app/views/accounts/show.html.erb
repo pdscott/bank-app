@@ -51,7 +51,7 @@
         <% if current_user.role == "admin" %>
           <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
         <% end %>
-        <% if @account.status != "pending"%>
+        <% if transaction.status == "pending" %>
           <td><%= link_to 'Cancel Transaction Request', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
@@ -63,7 +63,7 @@
 <br>
 
 <% if @account.status != "pending"%>
-  <%= link_to 'Request New Transaction', new_transaction_path(account_id: @account.id) %>
+  <%= link_to 'Request New Transaction', new_transaction_path(account_id: @account.id) %> |
 <% else %>
   <p> Account Awaiting Approval </p>
 <% end %>

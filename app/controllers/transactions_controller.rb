@@ -11,6 +11,8 @@ class TransactionsController < ApplicationController
   # GET /transactions/1
   # GET /transactions/1.json
   def show
+    @transaction = Transaction.find(params[:id])
+    @account = Account.find(@transaction.account_id)
   end
 
   # GET /transactions/new
@@ -44,7 +46,7 @@ class TransactionsController < ApplicationController
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
+        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.', id: @transaction.id }
         format.json { render :show, status: :ok, location: @transaction }
       else
         format.html { render :edit }
@@ -58,7 +60,7 @@ class TransactionsController < ApplicationController
   def destroy
     @transaction.destroy
     respond_to do |format|
-      format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
+      format.html { redirect_to account_url, notice: 'Transaction was successfully destroyed.'}
       format.json { head :no_content }
     end
   end
