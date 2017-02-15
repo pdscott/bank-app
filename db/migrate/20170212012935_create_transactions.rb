@@ -6,10 +6,10 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
       t.string :status
       t.integer :from
       t.integer :to
+      t.boolean :processed
       t.datetime :start_date
       t.datetime :eff_date
       t.references :account
-
 
       t.timestamps
     end

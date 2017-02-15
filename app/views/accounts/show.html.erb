@@ -17,7 +17,7 @@
 
 <p>
   <strong>Balance:</strong>
-  <%= @account.balance %>
+  <%= sprintf("%.2f",@account.balance) %>
 </p>
 
 <h1>Transactions</h1>

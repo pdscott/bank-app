@@ -15,7 +15,8 @@ class Transaction < ApplicationRecord
     else
       self.status ||= 'pending'
     end
-    self.start_date = self.created_at
+    self.start_date = DateTime.new
+    self.processed = false
   end
 
   def disposition

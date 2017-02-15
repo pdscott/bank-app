@@ -29,16 +29,21 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
-
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+    if @transaction.kind == 'withdraw' && @transaction.amount < 1000
+      account = Account.find(@transaction.account_id)
+      if account.balance > @transaction.amount
+        account.balance -= @transaction.amount
+        account.save
+        @transaction.processed = true
       end
     end
+
+    if @transaction.save
+      redirect_to @transaction, notice: 'Transaction was successfully created.'
+    else
+       render :new
+    end
+
   end
 
   # PATCH/PUT /transactions/1
