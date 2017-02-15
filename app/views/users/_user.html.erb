@@ -8,17 +8,15 @@
 </td>
 
 <td>
-  <%= link_to 'accounts', accounts_path %>
+  <%= link_to 'View Accounts', user_accounts_path(user.id) %>
 </td>
 
 <td>
-  Active
-</td>
-
-<td>
-  <%= form_for(user) do |f| %>
-    <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
-    <%= f.submit 'Change Role', :class => 'button-xs' %>
+  <% if user.id != 1 %>
+    <%= form_for(user) do |f| %>
+      <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
+      <%= f.submit 'Change Role', :class => 'button-xs' %>
+    <% end %>
   <% end %>
 </td>
 <td>

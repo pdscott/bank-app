@@ -15,4 +15,5 @@ class Account < ApplicationRecord
   validates :status, :inclusion => {:in => Account.all_statuses}
   validates :balance, :presence => true
 
+
 end
