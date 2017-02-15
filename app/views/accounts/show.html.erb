@@ -1,0 +1,81 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @account.user.name %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= sprintf("%09d",@account.id) %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @account.status %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @account.balance %>
+</p>
+
+<h1>Transactions</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Kind</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Requested Date</th>
+    <th>Effective date</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @transactions.each do |transaction| %>
+    <% if transaction.account_id == @account.id %>
+      <tr>
+        <td><%= transaction.kind %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.status %></td>
+        <td><%= transaction.from %></td>
+        <td><%= transaction.to %></td>
+        <td><%= transaction.created_at %></td>
+        <td><%= transaction.eff_date %></td>
+        <td><%= link_to 'Show', transaction %></td>
+        <% if current_user.role == "admin" %>
+          <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+        <% end %>
+        <% if @account.status != "pending"%>
+          <td><%= link_to 'Cancel Transaction Request', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if @account.status != "pending"%>
+  <%= link_to 'Request New Transaction', new_transaction_path(account_id: @account.id) %>
+<% else %>
+  <p> Account Awaiting Approval </p>
+<% end %>
+<% if current_user.role == "admin" %>
+  <%= link_to 'Edit Account', edit_account_path(@account) %> |
+<% end %>
+
+
+
+
+<% if current_user.role == "user" %>
+    <%= link_to 'Back', user_accounts_path(current_user) %>
+<% elsif current_user.role == "admin" %>
+    <%= link_to 'Back', accounts_path %>
+<% end %>

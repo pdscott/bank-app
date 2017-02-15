@@ -1,0 +1,10 @@
+<h1>New Account</h1>
+
+<%= render 'newform', account: @account %>
+
+
+<% if current_user.role == "user" %>
+  <%= link_to 'Back', new_user_account_path(current_user) %>
+<% elsif current_user.role == "admin" %>
+    <%= link_to 'Back', accounts_path(current_user) %>
+<% end %>

@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150101174918) do
+ActiveRecord::Schema.define(version: 20170212012935) do
+
+  create_table "accounts", force: :cascade do |t|
+    t.string   "status"
+    t.float    "balance"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.string   "kind"
+    t.float    "amount"
+    t.string   "status"
+    t.integer  "from"
+    t.integer  "to"
+    t.datetime "start_date"
+    t.datetime "eff_date"
+    t.integer  "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_transactions_on_account_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -27,9 +49,8 @@ ActiveRecord::Schema.define(version: 20150101174918) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "role"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
