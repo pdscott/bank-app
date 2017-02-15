@@ -44,6 +44,11 @@ class TransactionsController < ApplicationController
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
+        if transaction_params[:status] == 'approved'
+          if transaction_params[:kind] == 'deposit'
+            #TODO insert rest of transaction logic
+          end
+        end
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: @transaction }
       else

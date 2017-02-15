@@ -1,0 +1,51 @@
+C = complete
+
+
+Points applicable throughout the bank app:
+-----------------------------------------------
+C-A user can have multiple accounts to manage money.
+C-User needs an admin’s authorization to deposit money.
+-User needs an admin’s authorization to withdraw money if  the transaction amount is greater than $1000 from his/her account.
+-User should be able to search through the list of users ( by name or email address) and add them as friends.
+-User can transfer money between his/her accounts and to a friend’s account without permission from an admin.
+C-An admin has the authorization to approve or decline any pending transactions.
+
+
+Admins:
+-------------
+-Log in with an email and password
+-Edit her/his profile details
+-Create new admins
+-View the list of all the admins and their profile details (except password)
+-Delete admins (except herself/himself and the preconfigured Admin)
+-Create an account for a user. An account will have the following attributes: Account Number (unique for each account, 9-digit number), status, balance
+-View the list of all the accounts. View the balance for the accounts
+-View the details of an account. Also, show the user who own the account.
+-Edit the details of an account
+-Approve or decline a transaction request
+-View the transaction history of an account
+-Delete an account from the system
+-View the list of all the users and their profile details (except password)
+-View the transaction history of a user 
+-Delete a user
+
+
+Users:
+---------
+C-Log in with email and password
+C-Edit her/his profile details
+C-View the details of his/her accounts
+C-Request the admin to create bank accounts
+-Search other users using email or name.
+-Add other users as friend
+-A user can only transfer money to friends.
+-View the list of his friends.
+C-View the list of transactions with their details. For example, the amount, from which account to which, status, start date and effective date.
+C-Cancel a transaction request.
+C-View their own transaction history.
+
+
+Bonus (Extra Credit):
+----------------------
+-If a user has successfully completed a transaction(it maybe a deposit/withdraw or transfer between friends) the system should send a notification message(email) to them with the details(account number, amount and effective timestamp of a transaction of the transaction.
+-User can send a borrow money request message to his/her friend. Once the friend approves this request, the transaction should be reflected to an account immediately
