@@ -31,7 +31,7 @@
 
         <div class="field">
           <%= f.label :to %>
-          <%= select('transaction', 'to', User.all.collect{ |c| [ c.name, c.id] }) %>
+          <%= select('transaction', 'to', User.all.collect{ |c| [ c.name, c.id] }, include_blank: true) %>
         </div>
       <% end %>
 

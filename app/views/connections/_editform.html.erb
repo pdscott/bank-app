@@ -1,0 +1,28 @@
+<%= form_for(connection) do |f| %>
+    <% if connection.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(connection.errors.count, "error") %> prohibited this connection from being saved:</h2>
+
+          <ul>
+            <% connection.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <p>
+      <%= f.label "Friend Request From:"  %>
+      <%= User.find(connection.sender).name %>
+    </p>
+
+    <p>
+      <%= f.label :status %>
+      <%= select('connection', 'status', Connection.all_statuses.collect{ |c| c }) %>
+    </p>
+
+
+    <div class="actions">
+      <%= f.hidden_field :sender, :value => current_user.id %>
+      <%= f.submit %>
+    </div>
+<% end %>

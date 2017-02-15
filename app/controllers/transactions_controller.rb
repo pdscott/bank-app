@@ -11,6 +11,8 @@ class TransactionsController < ApplicationController
   # GET /transactions/1
   # GET /transactions/1.json
   def show
+    @transaction = Transaction.find(params[:id])
+    @account = Account.find(@transaction.account_id)
   end
 
   # GET /transactions/new
@@ -27,16 +29,21 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
-
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+    if @transaction.kind == 'withdraw' && @transaction.amount < 1000
+      account = Account.find(@transaction.account_id)
+      if account.balance > @transaction.amount
+        account.balance -= @transaction.amount
+        account.save
+        @transaction.processed = true
       end
     end
+
+    if @transaction.save
+      redirect_to @transaction, notice: 'Transaction was successfully created.'
+    else
+       render :new
+    end
+
   end
 
   # PATCH/PUT /transactions/1
@@ -44,12 +51,7 @@ class TransactionsController < ApplicationController
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
-        if transaction_params[:status] == 'approved'
-          if transaction_params[:kind] == 'deposit'
-            #TODO insert rest of transaction logic
-          end
-        end
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
+        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.', id: @transaction.id }
         format.json { render :show, status: :ok, location: @transaction }
       else
         format.html { render :edit }
@@ -63,7 +65,7 @@ class TransactionsController < ApplicationController
   def destroy
     @transaction.destroy
     respond_to do |format|
-      format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
+      format.html { redirect_to account_url, notice: 'Transaction was successfully destroyed.'}
       format.json { head :no_content }
     end
   end

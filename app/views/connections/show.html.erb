@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Friend1:</strong>
+  <%= User.find(@connection.sender).name %>
+</p>
+
+<p>
+  <strong>Friend2:</strong>
+  <%= User.find(@connection.recipient).name %>
+</p>
+
+<%= link_to 'Edit', edit_user_connection_path(@connection) %> |
+<%= link_to 'Back', user_connections_path(current_user) %>

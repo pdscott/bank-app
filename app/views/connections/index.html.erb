@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<h1>My Friends</h1>
+<h4>Current Friends</h4>
+<table>
+  <tbody>
+  <% @connections.each do |connection| %>
+      <% if connection.recipient == current_user.id && connection.status == 'accepted' %>
+          <tr>
+            <td> <%=User.find(connection.sender).name %></td>
+            <td><%= link_to 'Delete', connection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% elsif connection.recipient == current_user.id && connection.status == 'accepted' %>
+          <tr>
+            <td> <%=User.find(connection.sender).name %></td>
+            <td><%= link_to 'Delete', connection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h4>Pending Requests</h4>
+<table>
+  <% @connections.each do |connection| %>
+      <% if connection.recipient == current_user.id && connection.status == 'pending' %>
+          <tr>
+            <td> Received from <%=User.find(connection.sender).name %></td>
+            <td><%= connection.status.titleize %></td>
+            <td><%= link_to 'Show', connection %></td>
+            <td><%= link_to 'Accept/Reject', edit_connection_path(connection) %></td>
+          </tr>
+      <% elsif  connection.sender == current_user.id && connection.status == 'pending'%>
+          <tr>
+            <td>Sent to <%= User.find(connection.recipient).name %></td>
+            <td><%= connection.status.titleize %></td>
+            <td><%= link_to 'Show', connection %></td>
+            <td><%= link_to 'Cancel Request', connection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+      <% end %>
+  <% end %>
+
+
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Friend Request', new_user_connection_path(current_user) %>

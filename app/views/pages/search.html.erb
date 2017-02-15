@@ -1,0 +1,14 @@
+
+<div class="field"><%= form_tag("/search", method: "get") do %>
+      <%= label_tag(:user, "Search for:") %>
+      <%= text_field_tag(:user) %>
+      <%= submit_tag("User") %>
+  <% end %>
+</div>
+
+<%= form_tag "/static_pages/search", :method => 'post' do %>
+    <p>
+      <%= text_field_tag "search[name]", params.has_key?("search") && params[:search].has_key?("name") ? params[:search][:name] : "" %>
+      <%= submit_tag " Search for Friends " %>
+    </p>
+<% end %>

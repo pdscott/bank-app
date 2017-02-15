@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20170214234343) do
     t.string   "status"
     t.integer  "from"
     t.integer  "to"
+    t.boolean  "processed"
     t.datetime "start_date"
     t.datetime "eff_date"
     t.integer  "account_id"

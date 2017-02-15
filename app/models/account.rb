@@ -8,12 +8,11 @@ class Account < ApplicationRecord
 
   def default_values
     self.status ||= "pending"
-    self.balance = 0.0
+    self.balance ||= 0.0
   end
 
   validates :status, :presence => true
   validates :status, :inclusion => {:in => Account.all_statuses}
   validates :balance, :presence => true
-
 
 end
