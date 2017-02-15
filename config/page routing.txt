@@ -55,4 +55,12 @@ cancel_user_registration GET    /users/cancel(.:format)                     devi
                          PATCH  /transactions/:id(.:format)                 transactions#update
                          PUT    /transactions/:id(.:format)                 transactions#update
                          DELETE /transactions/:id(.:format)                 transactions#destroy
+             connections GET    /connections(.:format)                      connections#index
+                         POST   /connections(.:format)                      connections#create
+          new_connection GET    /connections/new(.:format)                  connections#new
+         edit_connection GET    /connections/:id/edit(.:format)             connections#edit
+              connection GET    /connections/:id(.:format)                  connections#show
+                         PATCH  /connections/:id(.:format)                  connections#update
+                         PUT    /connections/:id(.:format)                  connections#update
+                         DELETE /connections/:id(.:format)                  connections#destroy
                     page GET    /pages/*id                                  high_voltage/pages#show
