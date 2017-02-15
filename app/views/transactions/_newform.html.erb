@@ -28,16 +28,13 @@
         <%= f.text_field :amount %>
       </div>
 
-      <div class="field">
-        <%= f.label :from %>
-        <%= select('transaction', 'from', User.all.collect{ |c| [ c.name, c.id] }) %>
-      </div>
 
-      <div class="field">
-        <%= f.label :to %>
-        <%= select('transaction', 'to', User.all.collect{ |c| [ c.name, c.id] }) %>
-      </div>
-    <% end %>
+        <div class="field">
+          <%= f.label :to %>
+          <%= select('transaction', 'to', User.all.collect{ |c| [ c.name, c.id] }) %>
+        </div>
+      <% end %>
+
 
     <div class="actions">
       <%= f.submit %>
