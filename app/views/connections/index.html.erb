@@ -9,9 +9,9 @@
           <tr>
             <td> <%=User.find(connection.sender).name %></td>
             <td><%= link_to 'Delete', connection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% elsif connection.recipient == current_user.id && connection.status == 'accepted' %>
+      <% elsif connection.sender == current_user.id && connection.status == 'accepted' %>
           <tr>
-            <td> <%=User.find(connection.sender).name %></td>
+            <td> <%=User.find(connection.recipient).name %></td>
             <td><%= link_to 'Delete', connection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
       </tr>

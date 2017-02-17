@@ -3,28 +3,17 @@ class Transaction < ApplicationRecord
 
   after_initialize :default_values
 
-  after_create :disposition
 
   def self.all_statuses ; %w[approved declined pending] ; end
 
-  def self.all_kinds ; %w[deposit withdraw send borrow] ; end
+  def self.all_kinds ; %w[deposit withdraw transfer send borrow] ; end
 
   def default_values
-    if (self.kind == 'withdraw' && self.amount < 1000) || self.kind == 'send' || self.kind == 'borrow'
-      self.status ||= 'approved'
-    else
-      self.status ||= 'pending'
-    end
+    self.status ||= 'pending'
     self.start_date = DateTime.new
     self.processed = false
   end
 
-  def disposition
-    if (self.kind == 'withdraw' && self.amount > 1000) || self.kind == 'send' || self.kind == 'borrow'
-      self.status ||= 'approved'
-    end
-    self.start_date = self.created_at
-  end
 
   validates :kind, :presence => true
   validates :kind, :inclusion => {:in => Transaction.all_kinds}

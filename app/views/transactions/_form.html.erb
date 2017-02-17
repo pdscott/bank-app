@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= f.label :status %>
-    <%= f.text_field :status %>
+    <%= select('transaction', 'status', Transaction.all_statuses.collect{ |c| c }) %>
   </div>
 
   <div class="field">
