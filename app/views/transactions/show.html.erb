@@ -2,7 +2,7 @@
 
 <p>
   <strong>Type:</strong>
-  <%= @transaction.kind %>
+  <%= @transaction.kind.titleize %>
 </p>
 
 <p>
@@ -12,17 +12,27 @@
 
 <p>
   <strong>Status:</strong>
-  <%= @transaction.status %>
+  <%= @transaction.status.titleize %>
 </p>
 
 <p>
   <strong>From:</strong>
-  <%= @transaction.from %>
+  <%= if @transaction.from
+        "#{User.find(Account.find(@transaction.from).user_id).name} #{sprintf("%09d",@transaction.from)}"
+      else
+        "N/A"
+      end
+  %>
 </p>
 
 <p>
   <strong>To:</strong>
-  <%= @transaction.to %>
+  <%= if @transaction.from
+        "#{User.find(Account.find(@transaction.to).user_id).name} #{sprintf("%09d",@transaction.to)}"
+      else
+        "N/A"
+      end
+  %>
 </p>
 
 <p>

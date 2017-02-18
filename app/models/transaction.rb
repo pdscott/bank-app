@@ -10,10 +10,8 @@ class Transaction < ApplicationRecord
 
   def default_values
     self.status ||= 'pending'
-    self.start_date = DateTime.new
     self.processed = false
   end
-
 
   validates :kind, :presence => true
   validates :kind, :inclusion => {:in => Transaction.all_kinds}

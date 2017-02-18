@@ -59,9 +59,9 @@
   <% @transactions.each do |transaction| %>
     <% if transaction.account_id == @account.id %>
       <tr>
-        <td><%= transaction.kind %></td>
+        <td><%= transaction.kind.titleize %></td>
         <td><%= transaction.amount %></td>
-        <td><%= transaction.status %></td>
+        <td><%= transaction.status.titleize %></td>
         <td><%= transaction.from %></td>
         <td><%= transaction.to %></td>
         <td><%= transaction.created_at %></td>

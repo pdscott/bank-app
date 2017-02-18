@@ -38,6 +38,8 @@ class TransactionsController < ApplicationController
         if account.balance > @transaction.amount
           account.balance -= @transaction.amount
           account.save
+          @transaction.start_date = Time.current
+          @transaction.eff_date = Time.current
           @transaction.status = 'approved'
           @transaction.processed = true
           @transaction.save
@@ -50,6 +52,8 @@ class TransactionsController < ApplicationController
           account2.balance += @transaction.amount
           account1.save
           account2.save
+          @transaction.start_date = Time.current
+          @transaction.eff_date = Time.current
           @transaction.status = 'approved'
           @transaction.processed = true
           @transaction.save
@@ -62,10 +66,18 @@ class TransactionsController < ApplicationController
           account2.balance += @transaction.amount
           account1.save
           account2.save
+          @transaction.start_date = Time.current
+          @transaction.eff_date = Time.current
           @transaction.status = 'approved'
           @transaction.processed = true
           @transaction.save
         end
+      elsif @transaction.kind == 'withdraw'
+        @transaction.start_date = Time.current
+          @transaction.save
+      elsif @transaction.kind == 'deposit'
+          @transaction.start_date = Time.current
+          @transaction.save
       end
 
       redirect_to @transaction, notice: 'Transaction was successfully created.'
@@ -87,6 +99,7 @@ class TransactionsController < ApplicationController
         if account.balance > @transaction.amount
           account.balance -= @transaction.amount
           account.save
+          @transaction.eff_date = Time.current
           @transaction.processed = true
           @transaction.save
         end
@@ -94,6 +107,7 @@ class TransactionsController < ApplicationController
         account = Account.find(@transaction.account_id)
         account.balance += @transaction.amount
         account.save
+        @transaction.eff_date = Time.current
         @transaction.processed = true
         @transaction.save
       end
