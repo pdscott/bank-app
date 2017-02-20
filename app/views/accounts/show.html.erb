@@ -6,19 +6,38 @@
 </p>
 
 <p>
-  <strong>Number:</strong>
+  <strong>Account Number:</strong>
   <%= sprintf("%09d",@account.id) %>
 </p>
 
 <p>
   <strong>Status:</strong>
-  <%= @account.status %>
+  <%= @account.status.titleize %>
 </p>
 
 <p>
   <strong>Balance:</strong>
   <%= sprintf("%.2f",@account.balance) %>
 </p>
+
+
+<% if @account.status == "active"%>
+    <%= link_to 'Request New Transaction', new_transaction_path(account_id: @account.id) %> |
+<% else %>
+    <p> Account Awaiting Approval </p>
+<% end %>
+<% if current_user.role == "admin" %>
+    <%= link_to 'Edit Account', edit_account_path(@account) %> |
+<% end %>
+
+
+
+
+<% if current_user.role == "user" %>
+    <%= link_to 'Back', user_accounts_path(current_user) %>
+<% elsif current_user.role == "admin" %>
+    <%= link_to 'Back', accounts_path %>
+<% end %>
 
 <h1>Transactions</h1>
 
@@ -38,11 +57,11 @@
 
   <tbody>
   <% @transactions.each do |transaction| %>
-    <% if transaction.account_id == @account.id %>
+    <% if transaction.account_id == @account.id or transaction.to == @account.id or transaction.from == @account.id%>
       <tr>
-        <td><%= transaction.kind %></td>
-        <td><%= transaction.amount %></td>
-        <td><%= transaction.status %></td>
+        <td><%= transaction.kind.titleize %></td>
+        <td><%= sprintf("$%.2f", transaction.amount) %></td>
+        <td><%= transaction.status.titleize %></td>
         <td><%= transaction.from %></td>
         <td><%= transaction.to %></td>
         <td><%= transaction.created_at %></td>
@@ -62,7 +81,7 @@
 
 <br>
 
-<% if @account.status != "pending"%>
+<% if @account.status == "active"%>
   <%= link_to 'Request New Transaction', new_transaction_path(account_id: @account.id) %> |
 <% else %>
   <p> Account Awaiting Approval </p>

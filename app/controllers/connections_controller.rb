@@ -5,6 +5,13 @@ class ConnectionsController < ApplicationController
   # GET /connections.json
   def index
     @connections = Connection.all
+    if params[:name_search]
+      @friends = User.where("name like ?", "%#{params[:name_search]}%")
+    elsif params[:email_search]
+      @friends = User.where("email like ?", "%#{params[:email_search]}%")
+    else
+      @friends = nil
+    end
   end
 
   # GET /connections/1
@@ -14,6 +21,7 @@ class ConnectionsController < ApplicationController
 
   # GET /connections/new
   def new
+    @friend = params[:friend]
     @connection = Connection.new
   end
 
@@ -56,7 +64,7 @@ class ConnectionsController < ApplicationController
   def destroy
     @connection.destroy
     respond_to do |format|
-      format.html { redirect_to connections_url, notice: 'Connection was successfully destroyed.' }
+      format.html { redirect_to user_connections_path(current_user), notice: 'Connection was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

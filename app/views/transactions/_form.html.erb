@@ -13,37 +13,27 @@
 
   <div class="field">
     <%= f.label :kind %>
-    <%= f.text_field :kind %>
+    <%= transaction.kind %>
   </div>
 
   <div class="field">
     <%= f.label :amount %>
-    <%= f.text_field :amount %>
+    <%= transaction.amount %>
   </div>
 
   <div class="field">
     <%= f.label :status %>
-    <%= f.text_field :status %>
-  </div>
-
-  <div class="field">
-    <%= f.label :from %>
-    <%= f.number_field :from %>
-  </div>
-
-  <div class="field">
-    <%= f.label :to %>
-    <%= f.number_field :to %>
+    <%= select('transaction', 'status', Transaction.all_statuses.collect{ |c| c }) %>
   </div>
 
   <div class="field">
     <%= f.label :start_date %>
-    <%= f.datetime_select :start_date %>
+    <%= transaction.start_date %>
   </div>
 
   <div class="field">
     <%= f.label :eff_date %>
-    <%= f.datetime_select :eff_date %>
+    <%= transaction.eff_date %>
   </div>
 
   <div class="actions">
