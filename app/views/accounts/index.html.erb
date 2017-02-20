@@ -17,7 +17,7 @@
           <tr>
             <td><%= sprintf("%09d",account.id) %></td>
             <td><%= account.status %></td>
-            <td><%= sprintf("%.2f",account.balance) %></td>
+            <td><%= sprintf("$%.2f",account.balance) %></td>
             <td><%= link_to 'Show', account %></td>
             <% if current_user.role == "admin" %>
               <td><%= link_to 'Edit', edit_account_path(account) %></td>

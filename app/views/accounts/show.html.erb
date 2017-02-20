@@ -60,7 +60,7 @@
     <% if transaction.account_id == @account.id or transaction.to == @account.id or transaction.from == @account.id%>
       <tr>
         <td><%= transaction.kind.titleize %></td>
-        <td><%= transaction.amount %></td>
+        <td><%= sprintf("$%.2f", transaction.amount) %></td>
         <td><%= transaction.status.titleize %></td>
         <td><%= transaction.from %></td>
         <td><%= transaction.to %></td>
