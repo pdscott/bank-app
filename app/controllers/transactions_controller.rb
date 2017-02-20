@@ -43,6 +43,7 @@ class TransactionsController < ApplicationController
           @transaction.status = 'approved'
           @transaction.processed = true
           @transaction.save
+          UserMailer.transaction_email(current_user, @transaction).deliver_later
         end
       elsif @transaction.kind == 'transfer' and @transaction.processed == false
         account1 = Account.find(@transaction.from)
