@@ -5,7 +5,8 @@
 // make all images responsive by default
 img {
   @extend .img-responsive;
-  margin: 0 auto;
+  margin: 1em;
+  float: left;
   }
 hr {
   display: block;

@@ -1,4 +1,26 @@
 <h3>Deposit </h3>
+
+<% connections = Connection.where("(sender = ? or recipient = ?) and status = ?",
+                                  current_user.id, current_user.id, 'accepted') %>
+<% friends = []
+   Connection.all.each do |c|
+     if c.recipient == current_user.id  and c.status == 'accepted'
+       friends << c.sender
+     elsif c.sender == current_user.id and c.status == 'accepted'
+       friends << c.recipient
+     end
+   end
+   friend_accounts = []
+   friends.each do |f|
+     Account.all.each do |a|
+       if a.user_id == f
+         friend_accounts << a.id
+       end
+     end
+   end
+%>
+
+
 <%= form_for(transaction) do |d| %>
     <% if transaction.errors.any? %>
         <div id="error_explanation">
@@ -118,25 +140,7 @@
         </div>
     <% end %>
 
-    <% connections = Connection.where("(sender = ? or recipient = ?) and status = ?",
-                                  current_user.id, current_user.id, 'accepted') %>
-    <% friends = []
-       Connection.all.each do |c|
-         if c.recipient == current_user.id  and c.status == 'accepted'
-           friends << c.sender
-         elsif c.sender == current_user.id and c.status == 'accepted'
-           friends << c.recipient
-         end
-       end
-       friend_accounts = []
-       friends.each do |f|
-         Account.all.each do |a|
-           if a.user_id == f
-             friend_accounts << a.id
-           end
-         end
-       end
-    %>
+
 
     <div class="field">
       <%= t.label :amount %>
@@ -157,6 +161,46 @@
 
     <%= t.hidden_field :account_id, value: @account.id %>
     <%= t.hidden_field :kind, value: 'send' %>
+    <div class="actions">
+      <%= t.submit %>
+    </div>
+
+<% end %>
+
+<hr>
+<h3>Request Money from a Friend</h3>
+<%= form_for(transaction) do |t| %>
+    <% if transaction.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+          <ul>
+            <% transaction.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= t.label :amount %>
+      <%= t.text_field :amount %>
+    </div>
+
+    <div class="field">
+      <%= t.label "Choose friend account to borrow from " %>
+      <%= select('transaction', 'from', friend_accounts.collect{
+          |fa| ["#{User.find(Account.find(fa).user_id).name} #{sprintf("%09d",fa)}", fa] }, include_blank: true) %>
+    </div>
+
+    <div class="field">
+      <%= t.label "Choose account to deposit money into" %>
+      <%= select('transaction', 'to', Account.where("user_id = ?", current_user.id).collect{
+        |a| ["#{current_user.name} #{sprintf("%09d",a.id)}", a.id]}, include_blank: true) %>
+    </div>
+
+    <%= t.hidden_field :account_id, value: @account.id %>
+    <%= t.hidden_field :kind, value: 'borrow' %>
     <div class="actions">
       <%= t.submit %>
     </div>

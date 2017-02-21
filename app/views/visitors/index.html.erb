@@ -1,4 +1,20 @@
-<h3>Welcome</h3>
+<div><%= image_tag("wolf_sil.png", size: "50x50") %></div>
+<h2>Welcome to Wolfpack Nation Credit Union</h2>
+<br>
+<br>
+<br>
+<br>
 
-<p><%= link_to 'Users:', users_path %> <%= User.count %> registered</p>
+<% if user_signed_in? %>
+    <% if current_user.try(:user?) %>
+        <p> Here are some things you can do:</p>
+        <ul>
+          <li> Edit your <%= link_to 'profile', edit_user_registration_path %> </li>
+          <li>Set up an <%= link_to 'account', user_accounts_path(current_user) %></li>
+          <li>Make a transaction: My Accounts -> Show -> Request New Transaction</li>
+          <li>View transaction history for an account: My Accounts -> Show -> Request New Transaction</li>
+          <li>Find a friend to enable seamless transfers: My Friends -> Connect to a New Friend</li>
+        </ul>
+    <% end %>
+<% end %>
 

@@ -1,0 +1,14 @@
+development:
+  :address: smtp.gmail.com
+  :port: 587
+  :authentication: plain
+  :user_name: wolfpacknationcu@gmail.com
+  :password: 9Ai.UYKb(dp8
+  :enable_starttls_auto: true
+production:
+  :address: smtp.gmail.com
+  :port: 587
+  :authentication: plain
+  :user_name: wolfpacknationcu@gmail.com
+  :password: 9Ai.UYKb(dp8
+  :enable_starttls_auto: true

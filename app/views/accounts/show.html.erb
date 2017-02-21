@@ -69,8 +69,9 @@
         <td><%= link_to 'Show', transaction %></td>
         <% if current_user.role == "admin" %>
           <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-        <% end %>
-        <% if transaction.status == "pending" %>
+        <% elsif transaction.kind == 'borrow' and Account.find(transaction.from).user_id == current_user.id and transaction.status == 'pending' %>
+            <td><%= link_to 'Approve/Deny Friend Loan', edit_transaction_path(transaction) %></td>
+        <% elsif transaction.status == "pending"%>
           <td><%= link_to 'Cancel Transaction Request', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
