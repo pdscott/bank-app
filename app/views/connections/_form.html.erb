@@ -1,0 +1,25 @@
+<%= form_for(connection) do |f| %>
+  <% if connection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(connection.errors.count, "error") %> prohibited this connection from being saved:</h2>
+
+      <ul>
+      <% connection.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label "Send Friend Request To:" %>
+    <%= User.find(params[:friend]).name  %>
+  </p>
+
+
+  <div class="actions">
+    <%= f.hidden_field :sender, :value => current_user.id %>
+    <%= f.hidden_field :recipient, :value => params[:friend] %>
+    <%= f.submit %>
+  </div>
+<% end %>
