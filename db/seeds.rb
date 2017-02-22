@@ -39,7 +39,6 @@ more_accounts = [{:status => 'active', :balance => 5000, :user_id => 2},
                  {:status => 'active', :balance => 5000, :user_id => 7}]
 
 
-
 more_accounts.each { |a| Account.create!(a)}
 
 puts 'CREATED ACCOUNTS'
