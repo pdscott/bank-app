@@ -43,6 +43,7 @@ class TransactionsController < ApplicationController
           @transaction.status = 'approved'
           @transaction.processed = true
           @transaction.save
+          UserMailer.transaction_email(current_user, @transaction).deliver_later
         end
       elsif @transaction.kind == 'transfer' and @transaction.processed == false
         account1 = Account.find(@transaction.from)
@@ -57,6 +58,7 @@ class TransactionsController < ApplicationController
           @transaction.status = 'approved'
           @transaction.processed = true
           @transaction.save
+          UserMailer.transaction_email(current_user, @transaction).deliver_later
         end
       elsif @transaction.kind == 'send' and @transaction.processed == false
         account1 = Account.find(@transaction.from)
@@ -71,6 +73,7 @@ class TransactionsController < ApplicationController
           @transaction.status = 'approved'
           @transaction.processed = true
           @transaction.save
+          UserMailer.transaction_email(current_user, @transaction).deliver_later
         end
       elsif @transaction.kind == 'withdraw'
         @transaction.start_date = Time.current
@@ -78,6 +81,9 @@ class TransactionsController < ApplicationController
       elsif @transaction.kind == 'deposit'
           @transaction.start_date = Time.current
           @transaction.save
+      elsif @transaction.kind == 'borrow'
+        @transaction.start_date = Time.current
+        @transaction.save
       end
 
       redirect_to @transaction, notice: 'Transaction was successfully created.'
@@ -89,12 +95,10 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /transactions/1
   # PATCH/PUT /transactions/1.json
   def update
-
-
     if @transaction.update(transaction_params)
 
       # implement all admin approved transactions here.
-      if @transaction.kind == 'withdraw' and @transaction.status == 'approved'
+      if @transaction.kind == 'withdraw' and @transaction.status == 'approved' and @transaction.processed == false
         account = Account.find(@transaction.account_id)
         if account.balance > @transaction.amount
           account.balance -= @transaction.amount
@@ -102,31 +106,46 @@ class TransactionsController < ApplicationController
           @transaction.eff_date = Time.current
           @transaction.processed = true
           @transaction.save
+          UserMailer.transaction_email(current_user, @transaction).deliver_later
         end
-      elsif @transaction.kind == 'deposit' and @transaction.status == 'approved'
+      elsif @transaction.kind == 'deposit' and @transaction.status == 'approved' and @transaction.processed == false
         account = Account.find(@transaction.account_id)
         account.balance += @transaction.amount
         account.save
         @transaction.eff_date = Time.current
         @transaction.processed = true
         @transaction.save
+        UserMailer.transaction_email(current_user, @transaction).deliver_later
+      elsif @transaction.kind == 'borrow' and @transaction.status == 'approved' and @transaction.processed == false
+        account1 = Account.find(@transaction.from)
+        account2 = Account.find(@transaction.to)
+        if account1.balance > @transaction.amount
+          account1.balance -= @transaction.amount
+          account2.balance += @transaction.amount
+          account1.save
+          account2.save
+          @transaction.start_date = Time.current
+          @transaction.eff_date = Time.current
+          @transaction.status = 'approved'
+          @transaction.processed = true
+          @transaction.account_id = account1.id
+          @transaction.save
+          UserMailer.transaction_email(current_user, @transaction).deliver_later
+        end
       end
 
       redirect_to @transaction, notice: 'Transaction was successfully updated.', id: @transaction.id
     else
       render :edit
     end
-
   end
 
   # DELETE /transactions/1
   # DELETE /transactions/1.json
   def destroy
+    account = Account.find(@transaction.account_id)
     @transaction.destroy
-    respond_to do |format|
-      format.html { redirect_to account_url, notice: 'Transaction was successfully destroyed.'}
-      format.json { head :no_content }
-    end
+    redirect_to account_path(account), notice: 'Transaction was successfully destroyed.'
   end
 
   private

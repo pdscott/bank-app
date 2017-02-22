@@ -11,11 +11,11 @@
       <% if connection.recipient == current_user.id && connection.status == 'accepted' %>
           <tr>
             <td> <%=User.find(connection.sender).name %></td>
-            <td><%= link_to 'Delete', connection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Delete', connection, class: 'goodlink', method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% elsif connection.sender == current_user.id && connection.status == 'accepted' %>
           <tr>
             <td> <%=User.find(connection.recipient).name %></td>
-            <td><%= link_to 'Delete', connection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Delete', connection, class: 'badlink', method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
       </tr>
   <% end %>
@@ -29,15 +29,15 @@
           <tr>
             <td> Received from <%=User.find(connection.sender).name %></td>
             <td><%= connection.status.titleize %></td>
-            <td><%= link_to 'Show', connection %></td>
-            <td><%= link_to 'Accept/Reject', edit_connection_path(connection) %></td>
+            <td><%= link_to 'Show', connection, class: 'goodlink' %></td>
+            <td><%= link_to 'Accept/Reject', edit_connection_path(connection),class: 'goodlink' %></td>
           </tr>
       <% elsif  connection.sender == current_user.id && connection.status == 'pending'%>
           <tr>
             <td>Sent to <%= User.find(connection.recipient).name %></td>
             <td><%= connection.status.titleize %></td>
-            <td><%= link_to 'Show', connection %></td>
-            <td><%= link_to 'Cancel Request', connection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Show', connection, class: 'goodlink'%></td>
+            <td><%= link_to 'Cancel Request', connection, class: 'badlink', method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
       <% end %>
   <% end %>
