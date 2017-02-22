@@ -73,6 +73,7 @@ class TransactionsController < ApplicationController
           @transaction.eff_date = Time.current
           @transaction.status = 'approved'
           @transaction.processed = true
+          @transaction.save
           sender = User.find(Account.find(@transaction.from).user_id)
           recipient = User.find(Account.find(@transaction.to).user_id)
           UserMailer.transaction_email(sender, @transaction).deliver_later

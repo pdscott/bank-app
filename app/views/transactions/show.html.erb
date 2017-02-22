@@ -45,4 +45,10 @@
   <%= @transaction.eff_date %>
 </p>
 
-<%= link_to 'Back', account_path(@account) %>
+<% if (@transaction.kind == 'borrow' or @transaction.kind == 'send') and User.find(Account.find(@transaction.from).user_id) == current_user %>
+  <%= link_to 'Back', account_path(Account.find(@transaction.from)) %>
+<% elsif (@transaction.kind == 'borrow' or @transaction.kind == 'send') and User.find(Account.find(@transaction.to).user_id) == current_user %>
+  <%= link_to 'Back', account_path(Account.find(@transaction.to)) %>
+<% else %>
+  <%= link_to 'Back', account_path(Account.find(@transaction.account_id)) %>
+<% end %>
