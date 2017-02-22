@@ -1272,12 +1272,14 @@
     </library>
     <library name="puma (v3.7.0, ruby-2.3.3-p222 (2)) [gem]">
       <CLASSES>
+        <root url="file://$APPLICATION_CONFIG_DIR$/rubystubs/rubystubs23/puma/3.7.0" />
         <root url="file://C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/puma-3.7.0/bin" />
         <root url="file://C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/puma-3.7.0/ext" />
         <root url="file://C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/puma-3.7.0/lib" />
         <root url="file://C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/puma-3.7.0/tools" />
       </CLASSES>
       <SOURCES>
+        <root url="file://$APPLICATION_CONFIG_DIR$/rubystubs/rubystubs23/puma/3.7.0" />
         <root url="file://C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/puma-3.7.0/bin" />
         <root url="file://C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/puma-3.7.0/ext" />
         <root url="file://C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/puma-3.7.0/lib" />
