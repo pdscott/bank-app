@@ -13,6 +13,7 @@ class TransactionsController < ApplicationController
   def show
     @transaction = Transaction.find(params[:id])
     @account = Account.find(@transaction.account_id)
+    @user = current_user
   end
 
   # GET /transactions/new
@@ -72,8 +73,10 @@ class TransactionsController < ApplicationController
           @transaction.eff_date = Time.current
           @transaction.status = 'approved'
           @transaction.processed = true
-          @transaction.save
-          UserMailer.transaction_email(current_user, @transaction).deliver_later
+          sender = User.find(Account.find(@transaction.from).user_id)
+          recipient = User.find(Account.find(@transaction.to).user_id)
+          UserMailer.transaction_email(sender, @transaction).deliver_later
+          UserMailer.transaction_email(recipient, @transaction).deliver_later
         end
       elsif @transaction.kind == 'withdraw'
         @transaction.start_date = Time.current
@@ -106,7 +109,8 @@ class TransactionsController < ApplicationController
           @transaction.eff_date = Time.current
           @transaction.processed = true
           @transaction.save
-          UserMailer.transaction_email(current_user, @transaction).deliver_later
+          user_to_mail = User.find(Account.find(@transaction.account_id).user_id)
+          UserMailer.transaction_email(user_to_mail, @transaction).deliver_later
         end
       elsif @transaction.kind == 'deposit' and @transaction.status == 'approved' and @transaction.processed == false
         account = Account.find(@transaction.account_id)
@@ -115,7 +119,8 @@ class TransactionsController < ApplicationController
         @transaction.eff_date = Time.current
         @transaction.processed = true
         @transaction.save
-        UserMailer.transaction_email(current_user, @transaction).deliver_later
+        user_to_mail = User.find(Account.find(@transaction.account_id).user_id)
+        UserMailer.transaction_email(user_to_mail, @transaction).deliver_later
       elsif @transaction.kind == 'borrow' and @transaction.status == 'approved' and @transaction.processed == false
         account1 = Account.find(@transaction.from)
         account2 = Account.find(@transaction.to)
@@ -130,7 +135,10 @@ class TransactionsController < ApplicationController
           @transaction.processed = true
           @transaction.account_id = account1.id
           @transaction.save
-          UserMailer.transaction_email(current_user, @transaction).deliver_later
+          sender = User.find(Account.find(@transaction.from).user_id)
+          recipient = User.find(Account.find(@transaction.to).user_id)
+          UserMailer.transaction_email(sender, @transaction).deliver_later
+          UserMailer.transaction_email(recipient, @transaction).deliver_later
         end
       end
 

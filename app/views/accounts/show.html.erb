@@ -27,17 +27,9 @@
     <p> Account Awaiting Approval </p>
 <% end %>
 <% if current_user.role == "admin" %>
-    <%= link_to 'Edit Account', edit_account_path(@account) %> |
+    <%= link_to 'Edit Account', edit_account_path(@account) %>
 <% end %>
 
-
-
-
-<% if current_user.role == "user" %>
-    <%= link_to 'Back', user_accounts_path(current_user) %>
-<% elsif current_user.role == "admin" %>
-    <%= link_to 'Back', accounts_path %>
-<% end %>
 
 <h1>Transactions</h1>
 
@@ -67,7 +59,7 @@
         <td><%= transaction.created_at %></td>
         <td><%= transaction.eff_date %></td>
         <td><%= link_to 'Show', transaction %></td>
-        <% if current_user.role == "admin" %>
+        <% if current_user.role == "admin" && transaction.status == "pending"%>
           <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
         <% elsif transaction.kind == 'borrow' and Account.find(transaction.from).user_id == current_user.id and transaction.status == 'pending' %>
             <td><%= link_to 'Approve/Deny Friend Loan', edit_transaction_path(transaction) %></td>
@@ -82,9 +74,10 @@
 
 <br>
 
-<% if @account.status == "active"%>
+<% if @account.status == "active" && current_user.role == "user"%>
   <%= link_to 'Request New Transaction', new_transaction_path(account_id: @account.id) %> |
-<% else %>
+<% end %>
+<% if @account.status == "pending" %>
   <p> Account Awaiting Approval </p>
 <% end %>
 <% if current_user.role == "admin" %>
@@ -97,5 +90,5 @@
 <% if current_user.role == "user" %>
     <%= link_to 'Back', user_accounts_path(current_user) %>
 <% elsif current_user.role == "admin" %>
-    <%= link_to 'Back', accounts_path %>
+    <%= link_to 'Back', user_accounts_path(@account.user_id) %>
 <% end %>

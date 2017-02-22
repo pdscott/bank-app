@@ -37,14 +37,14 @@
     <% if @account != nil %>
         <div class="field">
           <%= d.label "To Account" %>
-          <%= select('transaction', 'account_id', Account.where("user_id = ?", current_user.id).collect{
-              |a| ["#{current_user.name} #{sprintf("%09d",a.id)}", a.id]}, include_blank: true) %>
+          <%= "#{current_user.name} #{sprintf("%09d",@account.id)}" %>
         </div>
 
         <div class="field">
           <%= d.label :amount %>
           <%= d.text_field :amount %>
         </div>
+        <%= d.hidden_field :account_id, value: @account.id %>
         <%= d.hidden_field :kind, value: 'deposit' %>
         <div class="actions">
           <%= d.submit %>
@@ -71,14 +71,14 @@
     <% if @account != nil %>
         <div class="field">
           <%= w.label "From Account" %>
-          <%= select('transaction', 'account_id', Account.where("user_id = ?", current_user.id).collect{
-              |a| ["#{current_user.name} #{sprintf("%09d",a.id)}", a.id]}, include_blank: true) %>
+          <%= "#{current_user.name} #{sprintf("%09d",@account.id)}" %>
         </div>
 
         <div class="field">
           <%= w.label :amount %>
           <%= w.text_field :amount %>
         </div>
+        <%= w.hidden_field :account_id, value: @account.id %>
         <%= w.hidden_field :kind, value: 'withdraw' %>
         <div class="actions">
           <%= w.submit %>
@@ -108,8 +108,7 @@
 
     <div class="field">
       <%= p.label "From Account" %>
-      <%= select('transaction', 'from', Account.where("user_id = ?", current_user.id).collect{
-          |a| ["#{current_user.name} #{sprintf("%09d",a.id)}", a.id]}, include_blank: true) %>
+      <%= "#{current_user.name} #{sprintf("%09d",@account.id)}" %>
     </div>
 
     <div class="field">
@@ -117,7 +116,7 @@
       <%= select('transaction', 'to', Account.where("user_id = ?", current_user.id).collect{
           |a| ["#{current_user.name} #{sprintf("%09d",a.id)}", a.id]}, include_blank: true) %>
     </div>
-
+    <%= p.hidden_field :from, value: @account.id %>
     <%= p.hidden_field :account_id, value: @account.id %>
     <%= p.hidden_field :kind, value: 'transfer' %>
     <div class="actions">
@@ -149,8 +148,7 @@
 
     <div class="field">
       <%= t.label "From Account" %>
-      <%= select('transaction', 'from', Account.where("user_id = ?", current_user.id).collect{
-          |a| ["#{current_user.name} #{sprintf("%09d",a.id)}", a.id]}, include_blank: true) %>
+      <%= "#{current_user.name} #{sprintf("%09d", @account.id)}" %>
     </div>
 
     <div class="field">
@@ -159,6 +157,7 @@
           |fa| ["#{User.find(Account.find(fa).user_id).name} #{sprintf("%09d",fa)}", fa] }, include_blank: true) %>
     </div>
 
+    <%= t.hidden_field :from, value: @account.id %>
     <%= t.hidden_field :account_id, value: @account.id %>
     <%= t.hidden_field :kind, value: 'send' %>
     <div class="actions">
@@ -194,11 +193,10 @@
     </div>
 
     <div class="field">
-      <%= t.label "Choose account to deposit money into" %>
-      <%= select('transaction', 'to', Account.where("user_id = ?", current_user.id).collect{
-        |a| ["#{current_user.name} #{sprintf("%09d",a.id)}", a.id]}, include_blank: true) %>
+      <%= t.label "Account to deposit money into" %>
+      <%= "#{current_user.name} #{sprintf("%09d",@account.id)}" %>
     </div>
-
+    <%= t.hidden_field :to, value: @account.id %>
     <%= t.hidden_field :account_id, value: @account.id %>
     <%= t.hidden_field :kind, value: 'borrow' %>
     <div class="actions">

@@ -6,6 +6,7 @@
     <% elsif current_user.try(:admin?) %>
       <li><%= link_to 'Manage Users', users_path %></li>
       <li><%= link_to 'Manage Accounts', accounts_path %></li>
+      <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
     <% end %>
     <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
 <% else %>

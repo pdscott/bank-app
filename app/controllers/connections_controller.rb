@@ -34,15 +34,12 @@ class ConnectionsController < ApplicationController
   def create
     @connection = Connection.new(connection_params)
 
-    respond_to do |format|
-      if @connection.save
-        format.html { redirect_to @connection, notice: 'Connection was successfully created.' }
-        format.json { render :show, status: :created, location: @connection }
-      else
-        format.html { render :new }
-        format.json { render json: @connection.errors, status: :unprocessable_entity }
-      end
+    if @connection.save
+      redirect_to @connection, notice: 'Connection was successfully created.'
+    else
+       render :new
     end
+
   end
 
   # PATCH/PUT /connections/1
