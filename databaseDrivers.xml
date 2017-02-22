@@ -9,7 +9,7 @@
       <option name="auto-sync" value="true" />
       <option name="auto-commit" value="false" />
     </driver>
-    <driver id="derby.embedded" name="Derby (Embedded)" dialect="Derby">
+    <driver id="derby.embedded" name="Derby (Embedded)" dialect="PostgreSQL">
       <artifact name="Apache Derby" use="true" version="10.11.1.1" />
       <option name="auto-sync" value="true" />
       <option name="auto-commit" value="true" />
@@ -23,8 +23,9 @@
       <option name="auto-sync" value="true" />
     </driver>
     <driver id="hsqldb.local" name="HSQLDB (Local)" dialect="HSQLDB">
-      <artifact name="HSQLDB" use="true" />
+      <artifact name="HSQLDB" use="true" version="2.3.2" />
       <option name="auto-sync" value="true" />
+      <option name="auto-commit" value="true" />
     </driver>
     <driver id="derby.remote" name="Derby (Remote)" dialect="Derby">
       <artifact name="Apache Derby" use="true" />
