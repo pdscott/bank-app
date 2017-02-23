@@ -4,7 +4,7 @@ h2.  Accounting Transaction Software
 
 This repository houses source code for the NCSU CSC517 Program 1 Ruby Rails Project.  The software can be cloned and run locally in development mode using a standard Ruby Rails installation.  Development mode runs an sqlite3 database so no configuration is needed.
 
-To use the app, one must create and account or use one of the following accounts which were created for testing purposes. (enabling the accounts on a new installation will require running db:seed .
+To use the app, one must create an account or use one of the following accounts which were created for testing purposes.  Enabling the accounts on a new installation will require running db:seed.
 
 Alternatively, the production version of the app is located at https://gentle-earth-51673.herokuapp.com/
 
@@ -24,7 +24,7 @@ Here are some things to try:
 # Select the account and create a transaction 
 ## Do a small withdrawal (< 1000) to see it post immediately (and get an email to the account you used to sign up)
 ## Do a larger withdrawal (> 1000)  to see it move to pending and then log in as the admin to approve it.
-# Create a friend request (feel free to use an existing use above)
+# Create a friend request (feel free to use an existing user above)
 ### Log in as the friend to accept.
 # Initiate a friend-to-friend money transfer using your new friend.
 # Ask the friend to borrow money and then log in as the friend to approve it.
