@@ -1,0 +1,6 @@
+one:
+  kind: withdrawal
+  amount: 500
+  status: approved
+  processed: true
+  account_id: 980190962
