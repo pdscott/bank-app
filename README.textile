@@ -10,7 +10,7 @@ Alternatively, the production version of the app is located at https://gentle-ea
 
 
 | Name | Email | Password |
-| admin | admin@email.com | rubyisgreat | 
+| admin | admin@email.com | rubyisgreat |
 | Homer Simpson | homer@email.com | 123456 |
 | Bart Simpson | bart@email.com | 123456 |
 | Chief Wiggum | chief@email.com | 123456 |
