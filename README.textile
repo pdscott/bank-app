@@ -1,11 +1,21 @@
-h1.  Bank App
+h1.  Wolfpack Nation Credit Union
 
-Usernames/Passwords for Development Mode db:seed
-Name               Email              Password
-admin              admin@email.com    rubyisgreat
-Homer Simpson      homer@email.com    123456
-Bart Simpson       bart@email.com     123456
-Chief Wiggum       chief@email.com    123456
-Marge Simpson      marge@email.com    123456
-Maggie Simpson     maggie@email.com   123456
-Krusty Clown       krusty@email.com   123456
+h2.  Accounting Transaction Software
+
+This repository houses source code for the NCSU CSC517 Program 1 Ruby Rails Project.  The software can be cloned and run locally in development mode using a standard Ruby Rails installation.  Development mode runs an sqlite3 database so no configuration is needed.
+
+To use the app, one must create and account or use one of the following accounts which were created for testing purposes. (enabling the accounts on a new installation will require running db:seed .
+
+Alternatively, the production version of the app is located at https://gentle-earth-51673.herokuapp.com/
+
+
+| Name | Email | Password |
+| admin | admin@email.com | rubyisgreat | 
+| Homer Simpson | homer@email.com | 123456 |
+| Bart Simpson | bart@email.com | 123456 |
+| Chief Wiggum | chief@email.com | 123456 |
+| Marge Simpson | marge@email.com | 123456 |
+| Maggie Simpson | maggie@email.com | 123456 |
+| Krusty Clown | krusty@email.com | 123456 |
+
+
