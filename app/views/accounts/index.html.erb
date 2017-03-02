@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Owner</th>
       <th>Number</th>
       <th>Status</th>
       <th>Balance</th>
@@ -15,13 +16,14 @@
   <tbody>
   <% @accounts.each do |account| %>
           <tr>
+            <td><%= User.find(account.user_id).name %> </td>
             <td><%= sprintf("%09d",account.id) %></td>
             <td><%= account.status %></td>
             <td><%= sprintf("$%.2f",account.balance) %></td>
             <td><%= link_to 'Show', account %></td>
-            <% if current_user.role == "admin" %>
+            <% if current_user.admin? or current_user.superadmin? %>
               <td><%= link_to 'Edit', edit_account_path(account) %></td>
-              <td><%= link_to('Delete account', account, :method => :delete, :data => { confirm: 'Are you sure?'}, :class => 'button-xs') %></td>
+              <td><%= link_to('Delete account', account, :method => :delete, :data => { confirm: 'Are you sure?'}) %></td>
             <% end %>
           </tr>
   <% end %>
@@ -30,9 +32,9 @@
 
 <br>
 
-<% if current_user.role == "user" %>
+<% if current_user.user? %>
   <%= link_to 'Request New Account', new_user_account_path %>
-<% elsif current_user.role == "admin" && params[:user_id]  %>
+<% elsif (current_user.admin? or current_user.superadmin?) && params[:user_id]  %>
   <%= link_to 'Create New Account', new_user_account_path(params[:user_id]) %>
 <% end %>
 

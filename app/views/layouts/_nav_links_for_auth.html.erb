@@ -3,7 +3,7 @@
       <li><%= link_to 'My Accounts', user_accounts_path(current_user) %></li>
       <li><%= link_to 'My Friends', user_connections_path(current_user) %></li>
       <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
-    <% elsif current_user.try(:admin?) %>
+    <% elsif current_user.try(:admin?) or current_user.try(:superadmin?) %>
       <li><%= link_to 'Manage Users', users_path %></li>
       <li><%= link_to 'Manage Accounts', accounts_path %></li>
       <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>

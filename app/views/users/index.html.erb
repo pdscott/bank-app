@@ -1,6 +1,13 @@
+
+
 <div class="container">
   <div class="row">
     <h3>Users</h3>
+    <%= form_tag users_path, :method => 'get' do %>
+        <%= select_tag 'filter', options_for_select(['All', 'Users', 'Admins'], @filter) %>
+        <%= submit_tag 'Filter By Role', :name => nil%>
+    <% end %>
+
     <div class="column">
       <table class="table">
         <tbody>

@@ -6,19 +6,19 @@
 <td>
   <%= link_to user.email, user %>
 </td>
+<% if !user.superadmin?  %>
+  <td>
+    <%= link_to 'View Accounts', user_accounts_path(user.id) %>
+  </td>
 
-<td>
-  <%= link_to 'View Accounts', user_accounts_path(user.id) %>
-</td>
-
-<td>
-  <% if user.id != 1 %>
+  <td>
     <%= form_for(user) do |f| %>
-      <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
+      <%= f.select(:role, %w[user admin]) %>
       <%= f.submit 'Change Role', :class => 'button-xs' %>
     <% end %>
-  <% end %>
-</td>
-<td>
-  <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
-</td>
+
+  </td>
+  <td>
+    <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
+  </td>
+<% end %>

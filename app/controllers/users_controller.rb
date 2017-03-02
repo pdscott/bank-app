@@ -3,8 +3,19 @@ class UsersController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @users = User.all
+    if params[:filter] == 'Users'
+      @users = User.where("role = 0")
+      @filter = 'Users'
+    elsif params[:filter] == 'Admins'
+      @users = User.where("role > 0")
+      @filter = 'Admins'
+    else
+      @users = User.all
+      @filter = 'All'
+
+    end
     authorize User
+
   end
 
   def show
