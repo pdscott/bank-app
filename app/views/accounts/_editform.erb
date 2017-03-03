@@ -22,7 +22,7 @@
 
     <p>
       <%= f.label :status %>
-      <%= select('account', 'status', Account.all_statuses.collect{ |c| c }) %>
+      <%= select 'account', 'status', ['active', 'closed'] %>
     </p>
 
     <p>

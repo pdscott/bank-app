@@ -50,17 +50,11 @@
 <h4>Connect to a New Friend</h4>
 <%= form_tag user_connections_path, :method => 'get' do %>
     <p>
-      <%= text_field_tag :name_search, params[:name_search] %>
-      <%= submit_tag "Search by Name", :name => nil %>
+      <%= text_field_tag :search_query, params[:search_query] %>
+      <%= submit_tag "Search by Name or Email", :name => nil %>
     </p>
 <% end %>
 
-<%= form_tag user_connections_path, :method => 'get' do %>
-    <p>
-      <%= text_field_tag :email_search, params[:email_search] %>
-      <%= submit_tag "Search by Email", :name => nil %>
-    </p>
-<% end %>
 
 <% if @friends %>
     <p><div><em> Found <%= @friends.count %> match(es).</em></div>

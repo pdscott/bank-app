@@ -34,7 +34,7 @@
 
 <% if current_user.user? %>
   <%= link_to 'Request New Account', new_user_account_path %>
-<% elsif (current_user.admin? or current_user.superadmin?) && params[:user_id]  %>
-  <%= link_to 'Create New Account', new_user_account_path(params[:user_id]) %>
+<% elsif (current_user.admin? or current_user.superadmin?) %>
+  <%= link_to 'Create New Account', new_account_path %>
 <% end %>
 

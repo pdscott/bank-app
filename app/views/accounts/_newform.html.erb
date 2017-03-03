@@ -11,14 +11,19 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :user %><br />
-      <%= f.label @account.user.name %><br />
-
-      <%= f.hidden_field :user_id, value: @account.user_id %>
-    </div>
-
-
+    <% if current_user.admin? or current_user.superadmin? %>
+        <div class="field">
+          <%= f.label 'Account Owner' %>
+          <%= select('account', 'user_id', User.where("role = ?", 0).collect{ |u| ["#{u.name}", u.id]}) %>
+          <%= f.hidden_field :status, value: 'active' %>
+        </div>
+    <% else %>
+        <div class="field">
+          <%= f.label :user %><br />
+          <%= f.label @user.name %><br />
+          <%= f.hidden_field :user_id, value: @user.id %>
+        </div>
+    <% end %>
 
     <div class="actions">
       <%= f.submit %>

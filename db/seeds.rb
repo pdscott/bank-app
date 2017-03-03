@@ -8,7 +8,7 @@
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
 
-#
+
 # more_users = [{:name => 'Homer  Simpson', :email => 'homer@email.com', :password => '123456', :password_confirmation => '123456'},
 #               {:name => 'Bart  Simpson', :email => 'bart@email.com', :password => '123456', :password_confirmation => '123456'},
 #               {:name => 'Chief Wiggum', :email => 'chief@email.com', :password => '123456', :password_confirmation => '123456'},

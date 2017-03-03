@@ -5,10 +5,8 @@ class ConnectionsController < ApplicationController
   # GET /connections.json
   def index
     @connections = Connection.all
-    if params[:name_search]
-      @friends = User.where("name like ?", "%#{params[:name_search]}%")
-    elsif params[:email_search]
-      @friends = User.where("email like ?", "%#{params[:email_search]}%")
+    if params[:search_query]
+      @friends = User.where("name like ? or email like ?", "%#{params[:search_query]}%", "%#{params[:search_query]}%")
     else
       @friends = nil
     end

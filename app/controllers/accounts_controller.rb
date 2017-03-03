@@ -29,9 +29,9 @@ class AccountsController < ApplicationController
   # GET /accounts/new
   def new
     @account = Account.new
-    @account.user = User.find(params[:user_id])
-    user = User.find(@account.user.id)
-    authorize user
+    @user = current_user
+    authorize @user
+
   end
 
   # GET /accounts/1/edit
