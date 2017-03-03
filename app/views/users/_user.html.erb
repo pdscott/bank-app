@@ -11,6 +11,7 @@
     <%= link_to 'View Accounts', user_accounts_path(user.id) %>
   </td>
 
+
   <td>
     <%= form_for(user) do |f| %>
       <%= f.select(:role, %w[user admin]) %>
@@ -19,6 +20,6 @@
 
   </td>
   <td>
-    <%= link_to("Delete user", users_path, :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
+    <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
   </td>
 <% end %>
