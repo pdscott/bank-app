@@ -53,8 +53,6 @@ class UsersController < ApplicationController
     authorize user
     redirect_to users_path, :notice => "User deleted."
 
-
-
   end
 
   private
