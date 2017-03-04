@@ -52,7 +52,6 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
 
-
     #destroy accounts that the user had and any friend transactions containing those accounts.
 
     accounts = Account.where("user_id = ?", params[:id])
@@ -67,7 +66,7 @@ class UsersController < ApplicationController
     user.destroy
 
     authorize user
-    redirect_to users_path, :notice => "User deleted."
+    redirect_to users_url, :notice => "User deleted."
 
   end
 
