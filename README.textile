@@ -25,12 +25,12 @@ Here are some things to try:
 
 h2. Notes for Reviewers
 
-Question 27 and 28: When a user's account is deleted, records of it will be erased from the history of our application. This includes any records of transactions. Although these records will be erased upon deletion, the balances incurred by the transations of the account will remain. That is, transactions will not be reversed once they have been approved by admins in cases where approval is necessary.
+Question 27 and 28: When a user's account is deleted, records of it will be erased from the history of our application. This includes any records of transactions. Although these records will be erased upon deletion, the balances incurred by the transations of the account will remain. That is, transactions will not be reversed once they have been approved by administrators in cases where approval is necessary.
 
 Question 30: When a user is deleted from WN Credit Union, all records of their account(s) will be erased from the history of the application. This means that any accounts they have open will be closed and deleted; any pending transactions will be deleted without approval; the user will be diassociated from friends completely and; the results of their previously approved/committed transactions will remain. 
 
 Question 32: As per the program specifications, admins cannot delete transactions that have already been posted to an account. However, they can decline transactions which are pending. In this case, the transaction does not complete and no money is exachanged.
 
-Question 34: In the event that an administrator deletes a user that has accounts with pending transactions, the records of the user and their transactions will be erased from the history of the application. Pending transactions will not post in this case and will not change tha balance of any accounts. 
+Question 34: If an administrator deletes a user that has accounts with pending transactions, the records of the user and their transactions will be erased from the history of the application. Pending transactions will not post in this case and will not change tha balance of any accounts. 
 
 
