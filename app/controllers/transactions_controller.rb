@@ -30,6 +30,7 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
+    @account = Account.find(@transaction.account_id)
 
     if @transaction.save
 
@@ -92,7 +93,7 @@ class TransactionsController < ApplicationController
 
       redirect_to @transaction, notice: 'Transaction was successfully created.'
     else
-       render :new
+       render :new, account_id: @account.id
     end
   end
 
