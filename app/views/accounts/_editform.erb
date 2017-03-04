@@ -22,7 +22,7 @@
 
     <p>
       <%= f.label :status %>
-      <%= select 'account', 'status', ['active', 'closed'] %>
+      <%= select 'account', 'status', ['active', 'closed'], :include_blank => 'Select'%>
     </p>
 
     <p>
