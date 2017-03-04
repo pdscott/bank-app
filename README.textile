@@ -18,7 +18,7 @@ Here are some things to try:
 # Select the account and create a transaction 
 ## Do a small withdrawal (< 1000) to see it post immediately (and get an email to the account you used to sign up)
 ## Do a larger withdrawal (> 1000)  to see it move to pending and then log in as the admin to approve it.
-# Create a friend request (feel free to use an existing user above)
+# Create a friend request
 ### Log in as the friend to accept.
 # Initiate a friend-to-friend money transfer using your new friend.
 # Ask the friend to borrow money and then log in as the friend to approve it.
