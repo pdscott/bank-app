@@ -16,6 +16,7 @@ class Transaction < ApplicationRecord
   validates :kind, :presence => true
   validates :kind, :inclusion => {:in => Transaction.all_kinds}
   validates :amount, :presence => true
+  validates_numericality_of :amount, :greater_than_or_equal_to => 0
   validates :status, :presence => true
   validates :status, :inclusion => {:in => Transaction.all_statuses}
 

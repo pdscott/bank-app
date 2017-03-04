@@ -41,8 +41,6 @@
           </tr>
       <% end %>
   <% end %>
-
-  </tbody>
 </table>
 
 <br>
@@ -57,11 +55,13 @@
 
 
 <% if @friends %>
-    <p><div><em> Found <%= @friends.count %> match(es).</em></div>
-  <% @friends.each do |friend| %>
-      <tr>
-        <td> Send a new friend request to <%= link_to friend.name, new_user_connection_path(current_user, :friend => friend) %> </td>
-      </tr>
-    </p>
-  <% end %>
+    <table>
+      <% @friends.each do |friend| %>
+          <% if friend.id != current_user.id %>
+            <tr>
+              <td> Send a new friend request to <%= link_to friend.name, new_user_connection_path(current_user, :friend => friend) %> </td>
+            </tr>
+        <% end %>
+      <% end %>
+    </table>
 <% end %>
