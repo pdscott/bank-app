@@ -12,8 +12,7 @@ class AccountsController < ApplicationController
       authorize user
     else
       @accounts = Account.all
-      user = User.find(1)
-      authorize user
+      authorize current_user
     end
   end
 
@@ -31,7 +30,6 @@ class AccountsController < ApplicationController
     @account = Account.new
     @user = current_user
     authorize @user
-
   end
 
   # GET /accounts/1/edit
