@@ -5,8 +5,25 @@ class ConnectionsController < ApplicationController
   # GET /connections.json
   def index
     @connections = Connection.all
+    @a = []
+    @b = []
+    @connections.each do |connection|
+      if (connection.sender == current_user.id && connection.status != 'rejected') || (connection.recipient == current_user.id && connection.status != 'rejected')
+        @a << connection
+      end
+    end
     if params[:search_query]
       @friends = User.where("name like ? or email like ?", "%#{params[:search_query]}%", "%#{params[:search_query]}%")
+      if @a.length > 0
+        @friends.each do |friend|
+          @a.each do |i|
+            if friend.id != i.sender && friend.id != i.recipient && !@b.include?(friend)
+              @b << friend
+            end
+          end
+        end
+        @friends = @b
+      end
     else
       @friends = nil
     end
