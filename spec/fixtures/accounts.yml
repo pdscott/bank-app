@@ -1,0 +1,14 @@
+one:
+  status: pending
+  balance: 3000
+  user_id: 715914056
+
+two:
+  status: approved
+  balance: 4000
+  user_id: 715914056
+
+three:
+  status: approved
+  balance: 5000
+  user_id: 857731028
