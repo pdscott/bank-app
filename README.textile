@@ -33,4 +33,4 @@ Question 32: As per the program specifications, admins cannot delete transaction
 
 Question 34: If an administrator deletes a user that has accounts with pending transactions, the records of the user and their transactions will be erased from the history of the application. Pending transactions will not post in this case and will not change tha balance of any accounts. 
 
-
+We did not provide any seeded users for testing purposes in this submission because there was no way to secure them from malicious intent. User details were being changed which gave the appearance of our application being broken when nothing was genuinely wrong with the functionality. As you use our application, we ask that you please use create your own accounts and use those. The Super Administrator account credentials have been provided, this account has been secured against modification. 
